@@ -5,14 +5,14 @@ from a selection of flavors, choose the number of scoops, and calculate the tota
 
 
 
-## :icecream: Features
+### :icecream: Features
 Users can select from a list of gelato flavors.
 Each flavor has a specific price per scoop.
 The system allows the user to choose how many scoops they want.
 The total price for the order is calculated based on the chosen flavor and number of scoops.
 Some flavors are marked as "Work In Progress" (WIP), and selecting them will notify the user to choose a different flavor.
 
-## :icecream: How It Works
+### :icecream: How It Works
 The user is greeted and prompted to enter their name.
 A menu of gelato flavors is displayed with along with each price.
 The user selects a flavor by entering the associated number.
