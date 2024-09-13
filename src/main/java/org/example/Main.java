@@ -16,11 +16,11 @@ public class Main {
         System.out.println("Hello, " + name + "! Let's create your gelato order.");
 
         System.out.println("Please select from the following flavor options:");
-        System.out.println("1. Pistachio ($2.00 per scoop)");
-        System.out.println("2. Dark Chocolate ($2.50 per scoop)");
-        System.out.println("3. Mango ($1.75 per scoop)");
-        System.out.println("4. Matcha ($3.75 per scoop) -WIP");
-        System.out.println("5. Lemon ($3.50 per scoop) -WIP");
+        System.out.println("1. Pistachio (€2.00 per scoop)");
+        System.out.println("2. Dark Chocolate (€2.50 per scoop)");
+        System.out.println("3. Mango (€1.75 per scoop)");
+        System.out.println("4. Matcha (€3.75 per scoop) -WIP");
+        System.out.println("5. Lemon (€3.50 per scoop) -WIP");
 //                System.out.println("6. Generate Bill and Exit");
 //
         int choice = scanner.nextInt();
@@ -42,7 +42,7 @@ public class Main {
         }
         //chosen flavor // using the get method
         System.out.println("You chose " + gelato.getFlavor());
-
+        System.out.println("That will be €" + gelato.getPricePerScoop() + " per scoop");
         //number of user scoops
         System.out.println("How many scoops of that would you like?");
         int scoops = scanner.nextInt();
@@ -51,8 +51,8 @@ public class Main {
         double totalPrice = gelato.calculatePrice(scoops);
 
         //order summary
-        System.out.println("Your final order is " + scoops + " scoops of " + gelato.getFlavor());
+        System.out.println(name + " your final order is " + scoops + " scoops of " + gelato.getFlavor());
        // gelato.displayInfo();
-        System.out.println("Your total is $" + totalPrice);
+        System.out.println("Your total will be €" + totalPrice);
         }
     }

@@ -33,7 +33,7 @@ public class Gelato extends Dessert{
         return pricePerScoop;
     }
 
-    public void setPricePerScoop(double pricePerScoop) {
+    private void setPricePerScoop(double pricePerScoop) {
         this.pricePerScoop = pricePerScoop;
     }
 
