@@ -3,7 +3,6 @@ package org.example;
 public class Gelato extends Dessert{
     private final GelatoFlavors flavor;
 
-    //String vessel;
 
     //constructor
     public Gelato(GelatoFlavors flavor, double pricePerScoop){
