@@ -15,16 +15,37 @@ This project uses a RESTful architecture, leveraging Spring Boot for handling HT
 - **Repository**: `SubscriptionRepository` interfaces with the database.
 - **Model**: `Subscription` represents the data model for subscriptions.
 
+```mermaid
+flowchart TD
+   A[com.example.assignment2] --> B[controller]
+   A --> C[model]
+   A --> D[repository]
+   B --> E[SubscriptionController]
+   C --> F[Subscription]
+   D --> G[SubscriptionRepository]
+```
 ### Package Structure:
- INSERT FLOW CHART
+Below is the Subscription table used
+```mermaid
+classDiagram
+    class subscription_info {
+        Long sub_id PK
+        String sub_name
+        String sub_type
+        String membership
+    }
+```
 
 ## Running Instructions
 
 ### Prerequisites
 - Java 22
 - Maven
-- MySQL
+- MySQL (DBeaver was used here, WorkBench is also fine)
 - IntelliJ Idea
+
+### Dependencies
+Please see pom.xml to make sure all the required dependencies are copied over including the plugins.
 
 ### Steps to Run:
 1. Clone the repository:
@@ -35,3 +56,33 @@ This project uses a RESTful architecture, leveraging Spring Boot for handling HT
 3. Build and run the Main.java file
 4. The API will be running at http://localhost:8080 or can be changed in the yml file
 5. This can be tested using [postman.com](https://www.postman.com/)
+
+
+## Editing Configuration
+To change any configuration such as database credentials, edit the application.yml file or application.properties file
+
+
+**Example:**
+```
+spring:
+datasource:
+url: jdbc:mysql://localhost:3306/your_db_name
+username: your_username
+password: your_password
+server:
+port: 8081  # change port if needed
+```
+
+
+## API Endpoints
+
+The API documentation is available in both OpenAPI spec and Swagger UI formats:
+
+- **OpenAPI JSON Spec**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+- **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+### Example Endpoints:
+- **GET** `/mysubs`: Retrieves all subscriptions.
+- **POST** `/add/sub`: Creates a new subscription.
+- **DELETE** `/subs/{sub_id}`: Deletes a subscription by ID.
+
