@@ -1,6 +1,6 @@
 #### Assignment 2 Java API
 # Subscription Management API :dependabot:
-This is a build your own API assignment, where I have used some of my SQL tables from [Assignment 3](https://github.com/laila-sb/CFG-Assignment3)<link> (from previous FullStack course) to demonstrate the functionality of API endpoints. This API allows you to manage subscriptions, including creating, retrieving, and deleting subscription records. It is built using Spring Boot and follows standard coding practices for architecture, access control, and clarity.
+This is a build your own API assignment, where I have used some of my SQL tables from [Assignment 3](https://github.com/laila-sb/CFG-Assignment3) (from previous FullStack course) to demonstrate the functionality of API endpoints. This API allows you to manage subscriptions, including creating, retrieving, and deleting subscription records. It is built using Spring Boot and follows standard coding practices for architecture, access control, and clarity.
 
 > #### Quick Reminder
 >The idea behind the database in assignment 3 was to keep track of users subscriptions. This could be a building block for a webapp to help users input their data and create a sort of tracker for all the services they might be subscribed to.
@@ -52,10 +52,10 @@ Please see pom.xml to make sure all the required dependencies are copied over in
    ```
    git clone https://github.com/yourusername/subscription-management-api.git
    cd subscription-management-api
-2. Set up the MySQL database with the following credentials (you can change them in application.yml):
+2. Run SQL code from the sql file using MySQL Workbench or DBeaver to create the database on your local system (you can change credentials in application.yml)
 3. Build and run the Main.java file
 4. The API will be running at http://localhost:8080 or can be changed in the yml file
-5. This can be tested using [postman.com](https://www.postman.com/)
+5. This can be tested using [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/)
 
 
 ## Editing Configuration
@@ -74,12 +74,12 @@ port: 8081  # change port if needed
 ```
 
 
-## API Endpoints
+## Testing API Endpoints with OpenAPI
 
 The API is available in both OpenAPI spec and Swagger UI formats, once the application is running use one of the links below:
 
-- **OpenAPI JSON Spec**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
-- **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **OpenAPI JSON Spec**: [Here](http://localhost:8080/v3/api-docs)
+- **Swagger UI**: [Here](http://localhost:8080/swagger-ui.html)
 
 ### Example Endpoints:
 - **GET** `/mysubs`: Retrieves all subscriptions.
