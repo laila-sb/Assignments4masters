@@ -65,7 +65,7 @@ Please see pom.xml to make sure all the required dependencies are copied over in
 To change any configuration such as database credentials, edit the application.yml file or application.properties file
 
 
-**Example:**
+#### **Example:**
 ```
 spring:
 datasource:
