@@ -1,4 +1,4 @@
-package com.example.assignment2.Controller;
+package com.example.assignment2.controller;
 
 import com.example.assignment2.model.Subscription;
 import com.example.assignment2.repository.SubscriptionRepository;
