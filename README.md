@@ -1,6 +1,6 @@
 #### Assignment 2 Java API
 # Subscription Management API :dependabot:
-This is a build your own API assignment, where I have used some of my SQL tables from [Assignment 3](https://github.com/laila-sb/CFG-Assignment3) (from previous FullStack course) to demonstrate the functionality of API endpoints. 
+This is a build your own API assignment, where I have used some of my SQL tables from [Assignment 3](https://github.com/laila-sb/CFG-Assignment3) (from previous FullStack course) to demonstrate the functionality of API endpoints.
 This API allows you to manage subscriptions, including creating, retrieving, and deleting subscription records. It uses a RESTful architecture, leveraging Spring Boot for handling HTTP requests and managing database interactions via JPA and the `SubscriptionRepository`.
 
 
@@ -8,20 +8,13 @@ This API allows you to manage subscriptions, including creating, retrieving, and
 >The idea behind the database in assignment 3 was to keep track of users subscriptions. This could be a building block for a webapp to help users input their data and create a sort of tracker for all the services they might be subscribed to.
 
 
-
-
-## Project Architecture: Package by Layer
+## Project Architecture:
 
 This project follows a **Package by Layer** architecture, organizing the codebase by technical responsibilities rather than by features. Each layer has a specific role:
 
-- **Controller Layer**: Responsible for handling HTTP requests and directing them to the appropriate service.
-- **Repository Layer**: Manages data access and interacts with the database.
-- **Model Layer**: Defines the data models used across the application.
+### Package by Layer:
 
-### Example Structure:
-
-### Components:
-- **Controller**: `SubscriptionController` handles incoming API requests.
+- **Controller**: `SubscriptionController` handles incoming API requests and directing them to the appropriate service.
 - **Repository**: `SubscriptionRepository` interfaces with the database.
 - **Model**: `Subscription` represents the data model for subscriptions.
 
@@ -34,16 +27,16 @@ flowchart TD
    C --> F[Subscription]
    D --> G[SubscriptionRepository]
 ```
-### Package Structure:
-Below is the subscription_info table used
+
+#### Below is the subscription_info table used
 ```mermaid
 classDiagram
-    class subscription_info {
-       +  Long sub_id PK
-       + String sub_name
-       + String sub_type
-       + String membership
-    }
+  class subscription_info {
+    +  Long sub_id PK
+    + String sub_name
+    + String sub_type
+    + String membership
+  }
 ```
 
 ## Running Instructions
@@ -64,7 +57,7 @@ Please see pom.xml to make sure all the required dependencies are copied over in
    cd subscription-management-api
 - Run SQL code from the sql file using MySQL Workbench or DBeaver to create the database on your local system (change credentials in application.yml)
 - Build and run the Main.java file
-- The API will be running at http://localhost:8080 
+- The API will be running at http://localhost:8080
 - API can be tested using [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/)
 
 
