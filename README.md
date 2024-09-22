@@ -8,20 +8,13 @@ This API allows you to manage subscriptions, including creating, retrieving, and
 >The idea behind the database in assignment 3 was to keep track of users subscriptions. This could be a building block for a webapp to help users input their data and create a sort of tracker for all the services they might be subscribed to.
 
 
-
-
-## Project Architecture: Package by Layer
+## Project Architecture: 
 
 This project follows a **Package by Layer** architecture, organizing the codebase by technical responsibilities rather than by features. Each layer has a specific role:
 
-- **Controller Layer**: Responsible for handling HTTP requests and directing them to the appropriate service.
-- **Repository Layer**: Manages data access and interacts with the database.
-- **Model Layer**: Defines the data models used across the application.
+### Package by Layer:
 
-### Example Structure:
-
-### Components:
-- **Controller**: `SubscriptionController` handles incoming API requests.
+- **Controller**: `SubscriptionController` handles incoming API requests and directing them to the appropriate service.
 - **Repository**: `SubscriptionRepository` interfaces with the database.
 - **Model**: `Subscription` represents the data model for subscriptions.
 
@@ -34,8 +27,8 @@ flowchart TD
    C --> F[Subscription]
    D --> G[SubscriptionRepository]
 ```
-### Package Structure:
-Below is the subscription_info table used
+
+#### Below is the subscription_info table used
 ```mermaid
 classDiagram
     class subscription_info {
