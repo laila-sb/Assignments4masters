@@ -48,14 +48,14 @@ classDiagram
 Please see pom.xml to make sure all the required dependencies are copied over including the plugins.
 
 ### Steps to Run:
-1. Clone the repository:
+- Clone the repository:
    ```
    git clone https://github.com/yourusername/subscription-management-api.git
    cd subscription-management-api
-2. Run SQL code from the sql file using MySQL Workbench or DBeaver to create the database on your local system (you can change credentials in application.yml)
-3. Build and run the Main.java file
-4. The API will be running at http://localhost:8080 or can be changed in the yml file
-5. This can be tested using [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/)
+- Run SQL code from the sql file using MySQL Workbench or DBeaver to create the database on your local system (change credentials in application.yml)
+- Build and run the Main.java file
+- The API will be running at http://localhost:8080 
+- API can be tested using [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/)
 
 
 ## Editing Configuration
@@ -78,8 +78,8 @@ port: 8081  # change port if needed
 
 The API is available in both OpenAPI spec and Swagger UI formats, once the application is running use one of the links below:
 
-- **OpenAPI JSON Spec**: [Here](http://localhost:8080/v3/api-docs)
-- **Swagger UI**: [Here](http://localhost:8080/swagger-ui.html)
+- [**OpenAPI JSON Spec**](http://localhost:8080/v3/api-docs)
+- [**Swagger UI**](http://localhost:8080/swagger-ui.html)
 
 ### Example Endpoints:
 - **GET** `/mysubs`: Retrieves all subscriptions.
