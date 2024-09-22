@@ -25,14 +25,14 @@ flowchart TD
    D --> G[SubscriptionRepository]
 ```
 ### Package Structure:
-Below is the Subscription table used
+Below is the subscription_info table used
 ```mermaid
 classDiagram
     class subscription_info {
-        Long sub_id PK
-        String sub_name
-        String sub_type
-        String membership
+       +  Long sub_id PK
+       + String sub_name
+       + String sub_type
+       + String membership
     }
 ```
 
@@ -76,7 +76,7 @@ port: 8081  # change port if needed
 
 ## API Endpoints
 
-The API documentation is available in both OpenAPI spec and Swagger UI formats:
+The API is available in both OpenAPI spec and Swagger UI formats, once the application is running use one of the links below:
 
 - **OpenAPI JSON Spec**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 - **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
