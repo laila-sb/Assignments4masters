@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,13 +24,14 @@ public class SubscriptionController {
         return subscriptionRepository.findAll();
     }
 
-//    @PostMapping("/sub")
-//    public ResponseEntity<Subscription> sub(@RequestParam String subName, @RequestParam String subType) {
-//        return ResponseEntity.ok(new Subscription());
-//
-//    }
+    @PostMapping("/add/sub")
+    public ResponseEntity<Subscription> sub(@RequestBody Subscription subscription) {
+        subscriptionRepository.save(subscription);
+        return ResponseEntity.ok(subscription);
+
+    }
     @DeleteMapping("/subs/{sub_id}")
-private void deleteSubscription(@PathVariable Long sub_id){
+    private void deleteSubscription(@PathVariable Long sub_id){
         if (subscriptionRepository.existsById(sub_id)) {
             subscriptionRepository.deleteById(sub_id);
             logger.info("Deleted Subscription with ID: {}", sub_id);
