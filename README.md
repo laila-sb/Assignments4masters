@@ -1,14 +1,24 @@
 #### Assignment 2 Java API
 # Subscription Management API :dependabot:
-This is a build your own API assignment, where I have used some of my SQL tables from [Assignment 3](https://github.com/laila-sb/CFG-Assignment3) (from previous FullStack course) to demonstrate the functionality of API endpoints. This API allows you to manage subscriptions, including creating, retrieving, and deleting subscription records. It is built using Spring Boot and follows standard coding practices for architecture, access control, and clarity.
+This is a build your own API assignment, where I have used some of my SQL tables from [Assignment 3](https://github.com/laila-sb/CFG-Assignment3) (from previous FullStack course) to demonstrate the functionality of API endpoints. 
+This API allows you to manage subscriptions, including creating, retrieving, and deleting subscription records. It uses a RESTful architecture, leveraging Spring Boot for handling HTTP requests and managing database interactions via JPA and the `SubscriptionRepository`.
+
 
 > #### Quick Reminder
 >The idea behind the database in assignment 3 was to keep track of users subscriptions. This could be a building block for a webapp to help users input their data and create a sort of tracker for all the services they might be subscribed to.
 
 
-## Architecture
 
-This project uses a RESTful architecture, leveraging Spring Boot for handling HTTP requests and managing database interactions via JPA and the `SubscriptionRepository`.
+
+## Project Architecture: Package by Layer
+
+This project follows a **Package by Layer** architecture, organizing the codebase by technical responsibilities rather than by features. Each layer has a specific role:
+
+- **Controller Layer**: Responsible for handling HTTP requests and directing them to the appropriate service.
+- **Repository Layer**: Manages data access and interacts with the database.
+- **Model Layer**: Defines the data models used across the application.
+
+### Example Structure:
 
 ### Components:
 - **Controller**: `SubscriptionController` handles incoming API requests.
