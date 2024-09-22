@@ -1,22 +1,25 @@
 package com.example.assignment2.model;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
+
 
 @Entity
 @Data
-@NoArgsConstructor
-@Table(name = "subscription_info")
+//@Builder
 public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sub_id;
+    private Long id;
     @NonNull
-    private String sub_name;
-    private String sub_type;
+    private String subName;
+    private String subType;
     private String membership;
 
 }
