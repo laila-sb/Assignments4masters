@@ -55,14 +55,14 @@ Please see pom.xml to make sure all the required dependencies are copied over in
    ```
    git clone https://github.com/yourusername/subscription-management-api.git
    cd subscription-management-api
-- Run SQL code from the sql file using MySQL Workbench or DBeaver to create the database on your local system (change credentials in application.yml)
+- Run SQL code from the sql file using MySQL Workbench or DBeaver to create the database on your local system (change credentials in application.properties file)
 - Build and run the Main.java file
 - The API will be running at http://localhost:8080
 - API can be tested using [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/)
 
 
 ## Editing Configuration
-To change any configuration such as database credentials, edit the application.yml file or application.properties file
+To change any configuration such as database credentials, edit the application.properties file
 
 
 #### **Example:**
