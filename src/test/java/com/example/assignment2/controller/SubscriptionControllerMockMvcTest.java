@@ -13,9 +13,8 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-
 
 
 @WebMvcTest(SubscriptionController.class)    //used to simulate actual http behaviour
@@ -47,9 +46,17 @@ public class SubscriptionControllerMockMvcTest {
             // simulate get req and validate response
             mockMvc.perform(get("/mysubs"))
                     .andExpect(status().isOk())
-                    .andReturn()
-                    .getResponse()
-                    .getContentAsString();
+                    .andExpect(jsonPath("$.length()").value(2))
+                    .andExpect(jsonPath("$[0].sub_name").value("First Subscription"))
+                    .andExpect(jsonPath("$[0].sub_type").value("Health"))
+                    .andExpect(jsonPath("$[0].membership").value("active"))
+                    .andExpect(jsonPath("$[1].sub_name").value("Second Subscription"))
+                    .andExpect(jsonPath("$[1].sub_type").value("Entertainment"))
+                    .andExpect(jsonPath("$[1].membership").value("active"));
+
+
+
+
 
     }
 }
