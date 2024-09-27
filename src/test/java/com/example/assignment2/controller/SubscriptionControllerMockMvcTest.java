@@ -7,8 +7,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.management.RuntimeErrorException;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -27,36 +31,45 @@ public class SubscriptionControllerMockMvcTest {
     private SubscriptionRepository subscriptionRepository;
 
     @Test
-    public void getAllSubscriptions_success() throws Exception {  //creating mock data
+    public void getAllSubscriptions_then_AllSubscriptionsReturned() throws Exception {  //creating mock data
 
         val firstSubscription = new Subscription();
-            firstSubscription.setSub_id(1L);
-            firstSubscription.setSub_name("First Subscription");
-            firstSubscription.setSub_type("Health");
+            firstSubscription.setSubId(1L);
+            firstSubscription.setSubName("First Subscription");
+            firstSubscription.setSubType("Health");
             firstSubscription.setMembership("active");
 
         val secondSubscription = new Subscription();
-            secondSubscription.setSub_id(2L);
-            secondSubscription.setSub_name("Second Subscription");
-            secondSubscription.setSub_type("Entertainment");
+            secondSubscription.setSubId(2L);
+            secondSubscription.setSubName("Second Subscription");
+            secondSubscription.setSubType("Entertainment");
             secondSubscription.setMembership("active");
 
             //mock call of mock repo
             when(subscriptionRepository.findAll()).thenReturn(List.of(firstSubscription, secondSubscription));
-            // simulate get req and validate response
+            //  mvc request builder, simulate get req and validate response
             mockMvc.perform(get("/mysubs"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.length()").value(2))
-                    .andExpect(jsonPath("$[0].sub_name").value("First Subscription"))
-                    .andExpect(jsonPath("$[0].sub_type").value("Health"))
+                    .andExpect(jsonPath("$[0].subName").value("First Subscription"))
+                    .andExpect(jsonPath("$[0].subType").value("Health"))
                     .andExpect(jsonPath("$[0].membership").value("active"))
-                    .andExpect(jsonPath("$[1].sub_name").value("Second Subscription"))
-                    .andExpect(jsonPath("$[1].sub_type").value("Entertainment"))
+                    .andExpect(jsonPath("$[1].subName").value("Second Subscription"))
+                    .andExpect(jsonPath("$[1].subType").value("Entertainment"))
                     .andExpect(jsonPath("$[1].membership").value("active"));
+    }
+    @Test
+    public void getAllSubscriptions_emptyListReturned() throws Exception {
+        when(subscriptionRepository.findAll()).thenReturn(Collections.emptyList());
+        mockMvc.perform(get("/mysubs"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(0));
 
+    }
 
-
-
-
+    @Test
+    public void getAllSubscription_invalidEndpoint() throws Exception { // no need to mock the repo, controller will never reach it
+        mockMvc.perform(get("/invalidEndpoint"))
+                .andExpect(status().isNotFound());
     }
 }
