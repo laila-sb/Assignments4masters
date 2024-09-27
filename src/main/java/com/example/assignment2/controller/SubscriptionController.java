@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
@@ -28,8 +29,26 @@ public class SubscriptionController {
 
     @GetMapping("/mysubs")
     public List<Subscription> getAllSubscriptions() {
+        try{
         logger.info("Retrieving all subscriptions");
         return subscriptionRepository.findAll();
+    }
+        catch (Exception e){
+            throw new RuntimeException("Error retrieving all subscriptions", e);
+        }
+    }
+
+    @GetMapping("/mysubs/active")
+    public List<Subscription> getAllActiveSubscriptions() {
+        try {
+            logger.info("Retrieving all active subscriptions");
+            return subscriptionRepository.findAll().stream()
+                    .filter(subscription -> "active".equals(subscription.getMembership())) // active membership filter
+                    .collect(Collectors.toList());
+        }
+        catch (Exception e){
+            throw new RuntimeException("Error retrieving active subscriptions", e);
+        }
     }
 
     @PostMapping("/add/sub")
