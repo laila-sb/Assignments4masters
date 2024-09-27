@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,11 +30,10 @@ public class SubscriptionController {
 
     @GetMapping("/mysubs")
     public List<Subscription> getAllSubscriptions() {
-        try{
-        logger.info("Retrieving all subscriptions");
-        return subscriptionRepository.findAll();
-    }
-        catch (Exception e){
+        try {
+            logger.info("Retrieving all subscriptions");
+            return subscriptionRepository.findAll();
+        } catch (Exception e) {
             throw new RuntimeException("Error retrieving all subscriptions", e);
         }
     }
@@ -45,8 +45,7 @@ public class SubscriptionController {
             return subscriptionRepository.findAll().stream()
                     .filter(subscription -> "active".equals(subscription.getMembership())) // active membership filter
                     .collect(Collectors.toList());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("Error retrieving active subscriptions", e);
         }
     }
@@ -58,16 +57,63 @@ public class SubscriptionController {
         return ResponseEntity.ok(subscription);
 
     }
-    @DeleteMapping("/subs/{sub_id}")
-    private void deleteSubscription(@PathVariable Long sub_id){
-        if (subscriptionRepository.existsById(sub_id)) {
-            subscriptionRepository.deleteById(sub_id);
-            logger.warn("Deleted Subscription with ID: {}", sub_id);
-        }else{
-            logger.error("Subscription with ID: {} not found", sub_id);
+
+    @DeleteMapping("/del/{subId}")
+    private void deleteSubscription(@PathVariable Long subId) {
+        if (subscriptionRepository.existsById(subId)) {
+            subscriptionRepository.deleteById(subId);
+            logger.warn("Deleted Subscription with ID: {}", subId);
+        } else {
+            logger.error("Subscription with ID: {} not found", subId);
+        }
+    }
+
+
+    public  <T> ResponseEntity<String> deleteSubscriptionByIdentifier(@PathVariable T identifier) {
+        try {
+            if (identifier instanceof Long) {
+                Long subId = (Long) identifier;
+                if (subscriptionRepository.existsById(subId)) {
+                    subscriptionRepository.deleteById(subId);
+                    logger.warn("Deleted Subscription with ID: {}", subId);
+                } else {
+                    logger.error("Subscription with ID: {} not found", subId);
+                    return ResponseEntity.ok("Subscription with ID: " + subId + " not found");
+                }
+            } else if (identifier instanceof String) {
+                var subName = (String) identifier;
+                List<Subscription> subs = subscriptionRepository.findBySubName(subName);
+                if (!subs.isEmpty()) {
+                    subscriptionRepository.deleteAll(subs);
+                    logger.warn("Deleted Subscription with name: {}", subName);
+                    return ResponseEntity.ok("Subscription with name: " + subName + " deleted successfully");
+                } else {
+                    logger.error("Subscription with name: {} not found", subName);
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Subscription with name: " + subName + " not found");
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid identifier type");
+            }
+        } catch (Exception e) {
+            logger.error("Error deleting subscription", e);
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting subscription");
+    }
+
+    @DeleteMapping("/delete/subs/{identifier}")
+    public ResponseEntity<String> deleteSubscription(@PathVariable String identifier) {
+            try {
+                // Try to parse the identifier as a Long (for ID)
+                Long subId = Long.parseLong(identifier);
+                return deleteSubscriptionByIdentifier(subId); // Call generic method
+
+            } catch (NumberFormatException e) {
+                // If parsing fails, treat identifier as a String (for name)
+                return deleteSubscriptionByIdentifier(identifier); // Call generic method
+
+            }
         }
 
-    }
     @PostConstruct
     public void init(){
         log.info("Server port: {}", serverPort);
