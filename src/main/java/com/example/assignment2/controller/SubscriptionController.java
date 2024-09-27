@@ -96,8 +96,10 @@ public class SubscriptionController {
             }
         } catch (Exception e) {
             logger.error("Error deleting subscription", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting subscription");
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting subscription");
+        //TO DO the return below is giving false server error
+        return ResponseEntity.ok("Subscription deleted successfully");
     }
 
     @DeleteMapping("/delete/subs/{identifier}")
