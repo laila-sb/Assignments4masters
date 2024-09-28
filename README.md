@@ -55,14 +55,14 @@ Please see pom.xml to make sure all the required dependencies are copied over in
    ```
    git clone https://github.com/yourusername/subscription-management-api.git
    cd subscription-management-api
-- Run SQL code from the sql file using MySQL Workbench or DBeaver to create the database on your local system (change credentials in application.properties file)
+- Run SQL code from the sql file using MySQL Workbench or DBeaver to create the database on your local system (change credentials in application.yml file)
 - Build and run the Main.java file
 - The API will be running at http://localhost:8080
 - API can be tested using [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/)
 
 
 ## Editing Configuration
-To change any configuration such as database credentials, edit the application.properties file
+To change any configuration such as database credentials, edit the yml file
 
 
 #### **Example:**
@@ -73,7 +73,7 @@ url: jdbc:mysql://localhost:3306/your_db_name
 username: your_username
 password: your_password
 server:
-port: 8081  # change port if needed
+port: 8080  # change port if needed
 ```
 
 
@@ -86,6 +86,52 @@ The API is available in both OpenAPI spec and Swagger UI formats, once the appli
 
 ### Example Endpoints:
 - **GET** `/mysubs`: Retrieves all subscriptions.
+- **GET** `/mysubs/active`: Retrieves all active subscriptions.
 - **POST** `/add/sub`: Creates a new subscription.
-- **DELETE** `/subs/{sub_id}`: Deletes a subscription by ID.
+- **DELETE** `/mysubs/delete/{identifier}`: Deletes a subscription by Identifier which can be either by id or name of subscription.
 
+
+# Testing Subscription Controller MVC Test
+
+Unit tests were written for the `subscriptionController` using Spring's Mvc framework in combination with Mockito. The aim was to validate the
+functionality by simulating HTTP requests and checking the responses without running the full Spring Boot application server.
+This file contains 3 tests:
+
+
+**1. getAllSubscriptions_then_AllSubscriptionsReturned()** : 
+- This simulates a /GET request.
+- The HTTP status is 200 OK.
+- The response contains two mock subscriptions.
+- Both subscriptions match expected values.
+- The subscriptionRepository.findAll() method is mocked to return a list of two subscriptions
+
+**2. getAllSubscriptions_emptyListReturned()**
+- This test is for the scenario where there are no subscriptions and an empty list is returned.
+- This simulates a /GET request.
+- The HTTP status is 200 OK.
+-  Response contains empty list of subscriptions.
+- The subscriptionRepository.findAll() method is mocked to return an empty list of subscriptions.
+
+**3. getAllSubscription_invalidEndpoint()**
+   This test checks how the application responds when an invalid endpoint is called:
+
+- The HTTP status is 404 Not Found.
+- No repository mocking is needed since the controller will not reach the repository due to the invalid endpoint.
+
+
+
+### How to Run the Tests in IntelliJ IDEA
+1. After Cloning the repository and open the project in IntelliJ IDEA.
+2. Navigate to the Test Class
+   Open the file SubscriptionControllerMockMvcTest.java located in the src/test/java/com/example/assignment2/controller/ directory.
+3. Run the Tests
+   To view the results, once the tests run, IntelliJ will display the results in the Run panel at the bottom. 
+You'll see which tests passed or failed.
+
+
+
+## Key Concepts learned:
+- **MockMvc:** Is a Spring class used to simulate HTTP requests and test the web layer (controller) without running a full server.
+- **@WebMvcTest:** Used to test Spring MVC controllers by only loading the web layer.
+- **@MockBean:** Mocks a Spring bean to avoid using the real database and instead returns mocked data.
+- **Mockito:** A popular Java framework used for creating mock objects and controlling the behavior of the methods in the tests.
