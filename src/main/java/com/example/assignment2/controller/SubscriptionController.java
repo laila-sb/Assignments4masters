@@ -66,7 +66,7 @@ public class SubscriptionController {
                     logger.warn("Deleted Subscription with ID: {}", subId);
                     return ResponseEntity.ok("Subscription with ID: " + subId + " deleted successfully");
                 } else {
-                    logger.error("Subscription with ID: {} not found", subId);
+                    logger.warn("Subscription with ID: {} not found", subId);
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Subscription with ID: " + subId + " not found");
                 }
             } else if (identifier instanceof String subName) {
@@ -76,7 +76,7 @@ public class SubscriptionController {
                     logger.warn("Deleted Subscription with name: {}", subName);
                     return ResponseEntity.ok("Subscription with name: " + subName + " deleted successfully");
                 } else {
-                    logger.error("Subscription with name: {} not found", subName);
+                    logger.warn("Subscription with name: {} not found", subName);
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Subscription with name: " + subName + " not found");
                 }
             } else {
