@@ -1,4 +1,4 @@
-#### Assignment 2 Java API
+#### Assignment 3 Java API Test
 # Subscription Management API :dependabot:
 This is a build your own API assignment, where I have used some of my SQL tables from [Assignment 3](https://github.com/laila-sb/CFG-Assignment3) (from previous FullStack course) to demonstrate the functionality of API endpoints.
 This API allows you to manage subscriptions, including creating, retrieving, and deleting subscription records. It uses a RESTful architecture, leveraging Spring Boot for handling HTTP requests and managing database interactions via JPA and the `SubscriptionRepository`.
@@ -135,3 +135,5 @@ You'll see which tests passed or failed.
 - **@WebMvcTest:** Used to test Spring MVC controllers by only loading the web layer.
 - **@MockBean:** Mocks a Spring bean to avoid using the real database and instead returns mocked data.
 - **Mockito:** A popular Java framework used for creating mock objects and controlling the behavior of the methods in the tests.
+- **Generic input:** Improving code funtionality and felxability using generics in methods (went down a rabbit hole here)
+  
