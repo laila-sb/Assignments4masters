@@ -58,30 +58,18 @@ public class SubscriptionController {
 
     }
 
-    @DeleteMapping("/del/{subId}")
-    private void deleteSubscription(@PathVariable Long subId) {
-        if (subscriptionRepository.existsById(subId)) {
-            subscriptionRepository.deleteById(subId);
-            logger.warn("Deleted Subscription with ID: {}", subId);
-        } else {
-            logger.error("Subscription with ID: {} not found", subId);
-        }
-    }
-
-
-    public  <T> ResponseEntity<String> deleteSubscriptionByIdentifier(@PathVariable T identifier) {
+    public <T> ResponseEntity<String> deleteSubscriptionByIdentifier(@PathVariable T identifier) {
         try {
-            if (identifier instanceof Long) {
-                Long subId = (Long) identifier;
+            if (identifier instanceof Long subId) {
                 if (subscriptionRepository.existsById(subId)) {
                     subscriptionRepository.deleteById(subId);
                     logger.warn("Deleted Subscription with ID: {}", subId);
+                    return ResponseEntity.ok("Subscription with ID: " + subId + " deleted successfully");
                 } else {
                     logger.error("Subscription with ID: {} not found", subId);
-                    return ResponseEntity.ok("Subscription with ID: " + subId + " not found");
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Subscription with ID: " + subId + " not found");
                 }
-            } else if (identifier instanceof String) {
-                var subName = (String) identifier;
+            } else if (identifier instanceof String subName) {
                 List<Subscription> subs = subscriptionRepository.findBySubName(subName);
                 if (!subs.isEmpty()) {
                     subscriptionRepository.deleteAll(subs);
@@ -98,20 +86,17 @@ public class SubscriptionController {
             logger.error("Error deleting subscription", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting subscription");
         }
-        //TO DO the return below is giving false server error
-        return ResponseEntity.ok("Subscription deleted successfully");
+
     }
 
     @DeleteMapping("/delete/subs/{identifier}")
     public ResponseEntity<String> deleteSubscription(@PathVariable String identifier) {
             try {
-                // Try to parse the identifier as a Long (for ID)
                 Long subId = Long.parseLong(identifier);
-                return deleteSubscriptionByIdentifier(subId); // Call generic method
-
+                return deleteSubscriptionByIdentifier(subId); // call generic method
             } catch (NumberFormatException e) {
                 // If parsing fails, treat identifier as a String (for name)
-                return deleteSubscriptionByIdentifier(identifier); // Call generic method
+                return deleteSubscriptionByIdentifier(identifier); // call generic method
 
             }
         }
