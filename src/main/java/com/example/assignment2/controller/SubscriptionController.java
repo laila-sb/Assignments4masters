@@ -89,7 +89,7 @@ public class SubscriptionController {
 
     }
 
-    @DeleteMapping("/delete/subs/{identifier}")
+    @DeleteMapping("/mysubs/delete/{identifier}")
     public ResponseEntity<String> deleteSubscription(@PathVariable String identifier) {
             try {
                 Long subId = Long.parseLong(identifier);
