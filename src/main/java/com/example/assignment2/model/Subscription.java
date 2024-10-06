@@ -13,10 +13,15 @@ import lombok.NonNull;
 public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sub_id;
+    @Column(name = "sub_id")
+    private Long subId;
     @NonNull
-    private String sub_name;
-    private String sub_type;
+    @Column(name = "sub_name")
+    private String subName;
+    @Column(name = "sub_type")
+    private String subType;
     private String membership;
 
 }
+
+
